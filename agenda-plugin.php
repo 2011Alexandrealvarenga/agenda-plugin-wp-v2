@@ -77,7 +77,14 @@ function agenda_shortcode() {
                 <div class="agenda-post">
                     <span><a href="<?php echo get_permalink() ;?>"><?php echo get_the_title() ;?></a></span>
                     <div><?php the_content(); ?></div>
-                    <small>Publicado em: <?php the_date(); ?></small>
+                    <?php 
+                    $evento_data = get_post_meta(get_the_ID(), '_data_evento', true);
+                    if ($evento_data) {
+                        echo '<small>Data do Evento: ' . date('d/m/Y', strtotime($evento_data)) . '</small>';
+                    } else {
+                        echo '<small>Data não definida</small>';
+                    }
+                    ?>
                 </div>
                 <hr>
                 <?php
@@ -88,14 +95,11 @@ function agenda_shortcode() {
         wp_reset_postdata();
         ?>
     </div>
-
-    
-
-    <!-- Área de resultados -->
     <div id="agenda-result"></div>
     <?php
     return ob_get_clean();
 }
+
 add_shortcode('agenda', 'agenda_shortcode');
 
 
@@ -105,11 +109,11 @@ function check_specific_day_posts() {
         $args = array(
             'post_type' => 'agenda',
             'posts_per_page' => -1,
-            'date_query' => array(
+            'meta_query' => array(
                 array(
-                    'year'  => date('Y', strtotime($date)),
-                    'month' => date('m', strtotime($date)),
-                    'day'   => date('d', strtotime($date)),
+                    'key'     => '_data_evento', // Chave do metabox
+                    'value'   => date('Y-m-d', strtotime($date)),
+                    'compare' => '='
                 ),
             ),
         );
@@ -121,8 +125,13 @@ function check_specific_day_posts() {
                 echo '<div class="agenda-post">';
                 echo '<span><a href="' . get_permalink() . '">' . get_the_title() . '</a></span>'; // Link no título
                 echo '<div>' . get_the_content() . '</div>';
-                echo '<small>Publicado em: ' . get_the_date() . '</small>';
-                echo '</div>';
+                $evento_data = get_post_meta(get_the_ID(), '_data_evento', true);
+                if ($evento_data) {
+                    echo '<small>Data do Evento: ' . date('d/m/Y', strtotime($evento_data)) . '</small>';
+                } else {
+                    echo '<small>Data não definida</small>';
+                }
+                echo '<hr></div>';
             }
         } else {
             echo '<p>Nenhum post encontrado para o dia ' . date('d/m/Y', strtotime($date)) . '.</p>';
@@ -131,6 +140,7 @@ function check_specific_day_posts() {
     }
     wp_die();
 }
+
 add_action('wp_ajax_check_specific_day_posts', 'check_specific_day_posts');
 add_action('wp_ajax_nopriv_check_specific_day_posts', 'check_specific_day_posts');
 
