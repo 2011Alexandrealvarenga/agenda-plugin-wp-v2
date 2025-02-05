@@ -79,12 +79,16 @@ function agenda_shortcode() {
                     <div><?php the_content(); ?></div>
                     <?php 
                     $evento_data = get_post_meta(get_the_ID(), '_data_evento', true);
-                    if ($evento_data) {
-                        echo '<small>Data do Evento: ' . date('d/m/Y', strtotime($evento_data)) . '</small>';
-                    } else {
-                        echo '<small>Data não definida</small>';
-                    }
+                    $local_value = get_post_meta(get_the_ID(), '_local_value', true);
+                    $horario_inicio = get_post_meta(get_the_ID(), '_horario_inicio', true);
+                    $horario_final = get_post_meta(get_the_ID(), '_horario_final', true);
+
                     ?>
+                    <span>Data do Evento: <?php echo date('d/m/Y', strtotime($evento_data));?></span><br>
+                    <span>Horario de inicio: <?php echo $horario_inicio;?></span><br>
+                    <span>Horario Final: <?php echo $horario_final;?></span><br>
+                    <span>Local: <?php echo $local_value;?></span><br>
+
                 </div>
                 <hr>
                 <?php
