@@ -30,7 +30,7 @@ function agenda_shortcode() {
             <input type="text" id="agenda-datepicker" readonly>
             
         </div>
-        <hr>
+        
         <!-- <button >Verificar posts do dia posterior</button> -->
         <div id="agenda-posts">
             <?php
@@ -60,6 +60,7 @@ function agenda_shortcode() {
                         </div>
                         <div class="content-date">
                             
+                        <span><?php echo date_i18n('j \d\e F', strtotime($evento_data));?></span> - <span><?php echo date('H:i', strtotime($horario_inicio));?></span> - <span><?php echo date('H:i', strtotime($horario_final));?></span>
                         </div>
                         <span class="list 1"><a href="<?php echo get_permalink() ;?>"><?php echo get_the_title() ;?></a></span>
                         <span><?php the_content(); ?></span>
