@@ -1,6 +1,8 @@
+.content-arrow {
+  margin-bottom: 16px;
+}
 .content-agenda .content-arrow {
-  display: flex
-;
+  display: flex;
 }
 .content-agenda .content-arrow .icon-arrow{
   width: 11px;
@@ -9,4 +11,15 @@
 .content-agenda .content-arrow .btn-arrow {
   border: 1px solid #d9d9d9;
   padding: 4px 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
 }
+.mg-r8{margin-right: 8px;}
+
+.content-hour {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.content-hour hr{width: 100%;}

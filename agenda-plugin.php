@@ -19,18 +19,18 @@ function agenda_shortcode() {
 
         <!-- <button id="check-previous-day">Verificar posts do dia anterior</button> -->
          <div class="content-arrow">
-            <div class="btn-arrow">
+            <div class="btn-arrow mg-r8">
                 <img src="<?php echo plugin_dir_url(__FILE__); ?>/assets/img/arrow-left.svg" id="check-previous-day" class="icon-arrow">
             </div>
-            <div class="btn-arrow">
+            <div class="btn-arrow mg-r8">
                 <img src="<?php echo plugin_dir_url(__FILE__); ?>/assets/img/arrow-right.svg" id="check-next-day" class="icon-arrow">
             </div>
 
-            <label for="agenda-datepicker">Selecione uma data:</label>
+            <label for="agenda-datepicker" class="mg-r8">Selecione uma data:</label>
             <input type="text" id="agenda-datepicker" readonly>
             
         </div>
-
+        <hr>
         <!-- <button >Verificar posts do dia posterior</button> -->
         <div id="agenda-posts">
             <?php
@@ -47,24 +47,28 @@ function agenda_shortcode() {
             if ($query->have_posts()) {
                 while ($query->have_posts()) {
                     $query->the_post();
-                    ?>
-                    <div class="agenda-post">
-                        <span class="list 1"><a href="<?php echo get_permalink() ;?>"><?php echo get_the_title() ;?></a></span>
-                        <span><?php the_content(); ?></span>
-                        <?php 
+
                         $evento_data = get_post_meta(get_the_ID(), '_data_evento', true);
                         $local_value = get_post_meta(get_the_ID(), '_local_value', true);
                         $horario_inicio = get_post_meta(get_the_ID(), '_horario_inicio', true);
                         $horario_final = get_post_meta(get_the_ID(), '_horario_final', true);
-    
-                        ?>
+                    ?>
+                    <div class="agenda-post">
+                        <div class="content-hour">
+                            <span class="mg-r8"><?php echo $horario_inicio;?></span>
+                            <hr>
+                        </div>
+                        <div class="content-date">
+                            
+                        </div>
+                        <span class="list 1"><a href="<?php echo get_permalink() ;?>"><?php echo get_the_title() ;?></a></span>
+                        <span><?php the_content(); ?></span>
                         <span>Horario de inicio: <?php echo $horario_inicio;?></span><br>
                         <span>Horario Final: <?php echo $horario_final;?></span><br>
                         <span>Local: <?php echo $local_value;?></span><br>
                         <span>Data do Evento: <?php echo date('d/m/Y', strtotime($evento_data));?></span><br>
     
                     </div>
-                    <hr>
                     <?php
                 }
             } else {
