@@ -13,6 +13,7 @@ include('inc/post-type.php');
 
 function agenda_shortcode() {
     ob_start();
+    
     ?>
     <div class="content-agenda">
 
@@ -24,8 +25,10 @@ function agenda_shortcode() {
             <div class="btn-arrow">
                 <img src="<?php echo plugin_dir_url(__FILE__); ?>/assets/img/arrow-right.svg" id="check-next-day" class="icon-arrow">
             </div>
+
             <label for="agenda-datepicker">Selecione uma data:</label>
             <input type="text" id="agenda-datepicker" readonly>
+            
         </div>
 
         <!-- <button >Verificar posts do dia posterior</button> -->
@@ -102,7 +105,6 @@ function check_specific_day_posts() {
             while ($query->have_posts()) {
                 $query->the_post()?>
                 <?php 
-                $evento_data = get_post_meta(get_the_ID(), '_data_evento', true);
                 $evento_data = get_post_meta(get_the_ID(), '_data_evento', true);
                 $local_value = get_post_meta(get_the_ID(), '_local_value', true);
                 $horario_inicio = get_post_meta(get_the_ID(), '_horario_inicio', true);
