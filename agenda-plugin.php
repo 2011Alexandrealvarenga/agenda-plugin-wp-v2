@@ -9,7 +9,6 @@ Author: Seu Nome
 // Função para registrar o CPT 'agenda_nova'
 include('functions.php');
 
-// Registrar o Custom Post Type 'Agenda'
 function agenda_register_post_type() {
     $labels = array(
         'name'               => 'Agendas',
@@ -50,58 +49,58 @@ add_action( 'init', 'agenda_register_post_type' );
 function agenda_shortcode() {
     ob_start();
     ?>
-    <!-- Botões para navegar entre dias -->
-    <button id="check-previous-day">Verificar posts do dia anterior</button>
-    <button id="check-next-day">Verificar posts do dia posterior</button>
+    <div class="content-agenda">
 
-    <!-- Campo de entrada para o calendário -->
-    <div>
-        <label for="agenda-datepicker">Selecione uma data:</label>
-        <input type="text" id="agenda-datepicker" readonly>
-    </div>
-    <div id="agenda-posts">
-        <?php
-        // Carrega os últimos 10 posts ao acessar a página
-        $args = array(
-            'post_type' => 'agenda',
-            'posts_per_page' => 10,
-            'orderby' => 'meta_value', // Ordena por campo meta
-            'order' => 'DESC', // Ordem decrescente
-            'meta_key' => '_data_evento', // Campo do metabox que armazena a data
-            'meta_type' => 'DATE' // Especifica que o tipo do campo é uma data
-        );
-        $query = new WP_Query($args);
-
-        if ($query->have_posts()) {
-            while ($query->have_posts()) {
-                $query->the_post();
-                ?>
-                <div class="agenda-post">
-                    <span class="list 1"><a href="<?php echo get_permalink() ;?>"><?php echo get_the_title() ;?></a></span>
-                    <span><?php the_content(); ?></span>
-                    <?php 
-                    $evento_data = get_post_meta(get_the_ID(), '_data_evento', true);
-                    $local_value = get_post_meta(get_the_ID(), '_local_value', true);
-                    $horario_inicio = get_post_meta(get_the_ID(), '_horario_inicio', true);
-                    $horario_final = get_post_meta(get_the_ID(), '_horario_final', true);
-
+        <button id="check-previous-day">Verificar posts do dia anterior</button>
+        <button id="check-next-day">Verificar posts do dia posterior</button>
+    
+        <div>
+            <label for="agenda-datepicker">Selecione uma data:</label>
+            <input type="text" id="agenda-datepicker" readonly>
+        </div>
+        <div id="agenda-posts">
+            <?php
+            $args = array(
+                'post_type' => 'agenda',
+                'posts_per_page' => 10,
+                'orderby' => 'meta_value', 
+                'order' => 'DESC', 
+                'meta_key' => '_data_evento',
+                'meta_type' => 'DATE' 
+            );
+            $query = new WP_Query($args);
+    
+            if ($query->have_posts()) {
+                while ($query->have_posts()) {
+                    $query->the_post();
                     ?>
-                    <span>Horario de inicioss: <?php echo $horario_inicio;?></span><br>
-                    <span>Horario Final: <?php echo $horario_final;?></span><br>
-                    <span>Local: <?php echo $local_value;?></span><br>
-                    <span>Data do Evento: <?php echo date('d/m/Y', strtotime($evento_data));?></span><br>
-
-                </div>
-                <hr>
-                <?php
+                    <div class="agenda-post">
+                        <span class="list 1"><a href="<?php echo get_permalink() ;?>"><?php echo get_the_title() ;?></a></span>
+                        <span><?php the_content(); ?></span>
+                        <?php 
+                        $evento_data = get_post_meta(get_the_ID(), '_data_evento', true);
+                        $local_value = get_post_meta(get_the_ID(), '_local_value', true);
+                        $horario_inicio = get_post_meta(get_the_ID(), '_horario_inicio', true);
+                        $horario_final = get_post_meta(get_the_ID(), '_horario_final', true);
+    
+                        ?>
+                        <span>Horario de inicio: <?php echo $horario_inicio;?></span><br>
+                        <span>Horario Final: <?php echo $horario_final;?></span><br>
+                        <span>Local: <?php echo $local_value;?></span><br>
+                        <span>Data do Evento: <?php echo date('d/m/Y', strtotime($evento_data));?></span><br>
+    
+                    </div>
+                    <hr>
+                    <?php
+                }
+            } else {
+                echo '<p>Nenhum post encontrado.</p>';
             }
-        } else {
-            echo '<p>Nenhum post encontrado.</p>';
-        }
-        wp_reset_postdata();
-        ?>
+            wp_reset_postdata();
+            ?>
+            <div id="agenda-result"></div>
+        </div>
     </div>
-    <div id="agenda-result"></div>
     <?php
     return ob_get_clean();
 }
@@ -117,7 +116,7 @@ function check_specific_day_posts() {
             'posts_per_page' => -1,
             'meta_query' => array(
                 array(
-                    'key'     => '_data_evento', // Chave do metabox
+                    'key'     => '_data_evento', 
                     'value'   => date('Y-m-d', strtotime($date)),
                     'compare' => '='
                 ),
@@ -140,12 +139,14 @@ function check_specific_day_posts() {
                 
                 ;?>
                 <div class="agenda-post">
-                <span class="list 1"><a href="<?php echo get_permalink() ;?>"><?php echo get_the_title() ;?></a></span>
-                <span><?php the_content(); ?></span>
-                <span>Horario de inicioaaa: <?php echo $horario_inicio;?></span><br>
-                <span>Horario Final: <?php echo $horario_final;?></span><br>
-                <span>Local: <?php echo $local_value;?></span>
-                <span>Data do Evento: <?php echo date('d/m/Y', strtotime($evento_data));?></span><br>
+                    <span class="list 1"><a href="<?php echo get_permalink() ;?>"><?php echo get_the_title() ;?></a></span>
+                    <span><?php the_content(); ?></span>
+                    <span>Horario de inicio: <?php echo $horario_inicio;?></span><br>
+                    <span>Horario Final: <?php echo $horario_final;?></span><br>
+                    <span>Local: <?php echo $local_value;?></span><br>
+                    <span>Data do Evento: <?php echo date('d/m/Y', strtotime($evento_data));?></span>
+                </div>
+                <hr>
                <?php 
             }
         } else {

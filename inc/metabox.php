@@ -2,14 +2,13 @@
 // metabox
 function criar_campo_personalizado_agenda() {
 
-  // local
   add_meta_box(
-      'local_value', // ID da meta box
-      'Local dados', // Título
-      'exibir_campo_local_value', // Função de exibição
-      'agenda', // Tipo de post
-      'normal', // Contexto da exibição (padrão ou lado)
-      'high' // Prioridade
+      'local_value', 
+      'Local dados', 
+      'exibir_campo_local_value', 
+      'agenda', 
+      'normal', 
+      'high' 
   );
 
 }
