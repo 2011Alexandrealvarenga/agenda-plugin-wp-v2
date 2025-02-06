@@ -3,7 +3,7 @@
  * Template Single para o Post Type "Agenda"
  */
 
-get_header(); // Carrega o cabeçalho do tema
+get_header(); 
 ?>
 
 <div id="primary" class="content-area">
@@ -29,12 +29,11 @@ get_header(); // Carrega o cabeçalho do tema
                 </footer>
             </article>
             <?php
-        endwhile; // Fim do loop
+        endwhile; 
         ?>
-    </main><!-- #main -->
-</div><!-- #primary -->
+    </main>
+</div>
 
 <?php
-get_sidebar(); // Carrega a sidebar do tema (se houver)
-get_footer(); // Carrega o rodapé do tema
-?>
+get_sidebar(); 
+get_footer(); 
