@@ -65,8 +65,9 @@ function agenda_shortcode() {
         $args = array(
             'post_type' => 'agenda',
             'posts_per_page' => 10,
-            'orderby' => 'date',
+            'orderby' => '_data_evento',
             'order' => 'DESC',
+            
         );
         $query = new WP_Query($args);
 
@@ -76,7 +77,7 @@ function agenda_shortcode() {
                 ?>
                 <div class="agenda-post">
                     <span><a href="<?php echo get_permalink() ;?>"><?php echo get_the_title() ;?></a></span>
-                    <div><?php the_content(); ?></div>
+                    <span><?php the_content(); ?></span>
                     <?php 
                     $evento_data = get_post_meta(get_the_ID(), '_data_evento', true);
                     $local_value = get_post_meta(get_the_ID(), '_local_value', true);
@@ -84,10 +85,10 @@ function agenda_shortcode() {
                     $horario_final = get_post_meta(get_the_ID(), '_horario_final', true);
 
                     ?>
-                    <span>Data do Evento: <?php echo date('d/m/Y', strtotime($evento_data));?></span><br>
                     <span>Horario de inicio: <?php echo $horario_inicio;?></span><br>
                     <span>Horario Final: <?php echo $horario_final;?></span><br>
                     <span>Local: <?php echo $local_value;?></span><br>
+                    <span>Data do Evento: <?php echo date('d/m/Y', strtotime($evento_data));?></span><br>
 
                 </div>
                 <hr>
@@ -123,19 +124,23 @@ function check_specific_day_posts() {
         );
         $query = new WP_Query($args);
 
+        $evento_data = get_post_meta(get_the_ID(), '_data_evento', true);
+        $evento_data = get_post_meta(get_the_ID(), '_data_evento', true);
+        $local_value = get_post_meta(get_the_ID(), '_local_value', true);
+        $horario_inicio = get_post_meta(get_the_ID(), '_horario_inicio', true);
+        $horario_final = get_post_meta(get_the_ID(), '_horario_final', true);
+
         if ($query->have_posts()) {
             while ($query->have_posts()) {
-                $query->the_post();
-                echo '<div class="agenda-post">';
-                echo '<span><a href="' . get_permalink() . '">' . get_the_title() . '</a></span>'; // Link no título
-                echo '<div>' . get_the_content() . '</div>';
-                $evento_data = get_post_meta(get_the_ID(), '_data_evento', true);
-                if ($evento_data) {
-                    echo '<small>Data do Evento: ' . date('d/m/Y', strtotime($evento_data)) . '</small>';
-                } else {
-                    echo '<small>Data não definida</small>';
-                }
-                echo '<hr></div>';
+                $query->the_post();?>
+                <div class="agenda-post">
+                <span><a href="<?php get_permalink();?>"><?php get_the_title();?></a></span> 
+                <span><?php get_the_content() ;?></span>
+                <span>Horario de inicio: <?php echo $horario_inicio;?></span><br>
+                <span>Horario Final: <?php echo $horario_final;?></span><br>
+                <span>Local: <?php echo $local_value;?></span><hr>
+                <span>Data do Evento: <?php echo date('d/m/Y', strtotime($evento_data));?></span><br>
+               <?php 
             }
         } else {
             echo '<p>Nenhum post encontrado para o dia ' . date('d/m/Y', strtotime($date)) . '.</p>';
