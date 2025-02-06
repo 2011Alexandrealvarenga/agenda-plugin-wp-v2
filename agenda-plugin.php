@@ -16,13 +16,19 @@ function agenda_shortcode() {
     ?>
     <div class="content-agenda">
 
-        <button id="check-previous-day">Verificar posts do dia anterior</button>
-        <button id="check-next-day">Verificar posts do dia posterior</button>
-    
-        <div>
+        <!-- <button id="check-previous-day">Verificar posts do dia anterior</button> -->
+         <div class="content-arrow">
+            <div class="btn-arrow">
+                <img src="<?php echo plugin_dir_url(__FILE__); ?>/assets/img/arrow-left.svg" id="check-previous-day" class="icon-arrow">
+            </div>
+            <div class="btn-arrow">
+                <img src="<?php echo plugin_dir_url(__FILE__); ?>/assets/img/arrow-right.svg" id="check-next-day" class="icon-arrow">
+            </div>
             <label for="agenda-datepicker">Selecione uma data:</label>
             <input type="text" id="agenda-datepicker" readonly>
         </div>
+
+        <!-- <button >Verificar posts do dia posterior</button> -->
         <div id="agenda-posts">
             <?php
             $args = array(

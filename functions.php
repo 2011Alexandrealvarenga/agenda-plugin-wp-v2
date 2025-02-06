@@ -20,11 +20,24 @@ function agenda_enqueue_scripts() {
   wp_localize_script('agenda-script', 'agenda_ajax', array(
       'ajax_url' => admin_url('admin-ajax.php')
   ));
+
+
 }
 add_action('wp_enqueue_scripts', 'agenda_enqueue_scripts');
 
 
+function agenda_enqueue_css(){
+    
+    wp_register_style(
+        'agenda_style',
+        plugin_dir_url(__FILE__) .'/assets/css/style-plugin.css'
+    );
 
+    wp_enqueue_style('agenda_style');
+}
+
+
+add_action('wp_enqueue_scripts', 'agenda_enqueue_css');
 
 
 

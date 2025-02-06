@@ -1,0 +1,12 @@
+.content-agenda .content-arrow {
+  display: flex
+;
+}
+.content-agenda .content-arrow .icon-arrow{
+  width: 11px;
+}
+
+.content-agenda .content-arrow .btn-arrow {
+  border: 1px solid #d9d9d9;
+  padding: 4px 8px;
+}
