@@ -30,7 +30,7 @@ function agenda_shortcode() {
             <input type="text" id="agenda-datepicker" readonly>
             
         </div>
-        
+        <h2 class="subtitle">Últimos Eventos</h2>
         <!-- <button >Verificar posts do dia posterior</button> -->
         <div id="agenda-posts">
             <?php
@@ -53,17 +53,19 @@ function agenda_shortcode() {
                         $horario_inicio = get_post_meta(get_the_ID(), '_horario_inicio', true);
                         $horario_final = get_post_meta(get_the_ID(), '_horario_final', true);
                     ?>
+                    
                     <div class="agenda-post">
+
                         <div class="content-hour">
                             <span class="mg-r8"><?php echo $horario_inicio;?></span>
                             <hr>
                         </div>
                         <div class="content-inside">
                             <div class="content-date">                                
-                                <span><?php echo date_i18n('j \d\e F', strtotime($evento_data));?></span> - <span><?php echo date('H:i', strtotime($horario_inicio));?></span> - <span><?php echo date('H:i', strtotime($horario_final));?></span>
+                                <span class="local"><?php echo date_i18n('j \d\e F', strtotime($evento_data));?></span> - <span class="local"><?php echo date('H:i', strtotime($horario_inicio));?></span> - <span class="local"><?php echo date('H:i', strtotime($horario_final));?></span>
                             </div>
-                            <h2 class=" title"><a href="<?php echo get_permalink() ;?>"><?php echo get_the_title() ;?></a></h2>
-                            <span>Local: <?php echo $local_value;?></span>    
+                            <h3 class="title"><a href="<?php echo get_permalink() ;?>"><?php echo get_the_title() ;?></a></h3>
+                            <span class="local"><?php echo $local_value;?></span>    
                         </div>
                     </div>
                     <?php

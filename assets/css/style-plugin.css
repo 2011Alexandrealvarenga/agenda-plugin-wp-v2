@@ -1,3 +1,6 @@
+.mg-r8{margin-right: 8px;}
+hr {border: 1px solid #e9e9e9;}
+
 .content-arrow {
   margin-bottom: 16px;
 }
@@ -15,7 +18,6 @@
   display: flex;
   justify-content: center;
 }
-.mg-r8{margin-right: 8px;}
 
 .content-hour {
   display: flex;
@@ -25,10 +27,22 @@
 .content-hour hr{width: 100%;}
 
 .content-agenda .title {
-  font-size: 32px;
+  font-size: 24px;
   margin: 0;
   padding: 0;
 }
 .agenda-post .content-inside {
   margin: 0 0 0 32px;
+  padding: 24px 0;
+}
+.content-agenda .subtitle{
+  font-size: 28px;
+}
+.agenda-post .content-inside .title a {
+  color: #000000;
+  text-decoration: none;
+  font-weight: 500;
+}
+.agenda-post .content-inside .local {
+  font-size: 15px;
 }
