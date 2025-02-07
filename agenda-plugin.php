@@ -115,11 +115,18 @@ function check_specific_day_posts() {
                 
                 ;?>
                 <div class="agenda-post">
-                    <span class=""><a href="<?php echo get_permalink() ;?>"><?php echo get_the_title() ;?></a></span>
-                    <span><?php //the_content(); ?></span>
-                    <span>Local: <?php echo $local;?></span><br>
-                </div>
-                <hr>
+                    <div class="content-hour">
+                        <span class="mg-r8"><?php echo $horario_inicio;?></span>
+                        <hr>
+                    </div>
+                    <div class="content-inside">
+                        <div class="content-date">                                
+                            <span class="local"><?php echo date_i18n('j \d\e F', strtotime($evento_data));?></span> - <span class="local"><?php echo date('H:i', strtotime($horario_inicio));?></span> - <span class="local"><?php echo date('H:i', strtotime($horario_final));?></span>
+                        </div>
+                        <h3 class="title"><a href="<?php echo get_permalink() ;?>"><?php echo get_the_title() ;?></a></h3>
+                        <span class="local"><?php echo $local;?></span>    
+                    </div>
+                    </div>
                <?php 
             }
         } else {
