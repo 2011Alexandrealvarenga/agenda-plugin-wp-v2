@@ -23,3 +23,12 @@
   align-items: center;
 }
 .content-hour hr{width: 100%;}
+
+.content-agenda .title {
+  font-size: 32px;
+  margin: 0;
+  padding: 0;
+}
+.agenda-post .content-inside {
+  margin: 0 0 0 32px;
+}

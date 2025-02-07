@@ -58,17 +58,13 @@ function agenda_shortcode() {
                             <span class="mg-r8"><?php echo $horario_inicio;?></span>
                             <hr>
                         </div>
-                        <div class="content-date">
-                            
-                        <span><?php echo date_i18n('j \d\e F', strtotime($evento_data));?></span> - <span><?php echo date('H:i', strtotime($horario_inicio));?></span> - <span><?php echo date('H:i', strtotime($horario_final));?></span>
+                        <div class="content-inside">
+                            <div class="content-date">                                
+                                <span><?php echo date_i18n('j \d\e F', strtotime($evento_data));?></span> - <span><?php echo date('H:i', strtotime($horario_inicio));?></span> - <span><?php echo date('H:i', strtotime($horario_final));?></span>
+                            </div>
+                            <h2 class=" title"><a href="<?php echo get_permalink() ;?>"><?php echo get_the_title() ;?></a></h2>
+                            <span>Local: <?php echo $local_value;?></span>    
                         </div>
-                        <span class="list 1"><a href="<?php echo get_permalink() ;?>"><?php echo get_the_title() ;?></a></span>
-                        <span><?php the_content(); ?></span>
-                        <span>Horario de inicio: <?php echo $horario_inicio;?></span><br>
-                        <span>Horario Final: <?php echo $horario_final;?></span><br>
-                        <span>Local: <?php echo $local_value;?></span><br>
-                        <span>Data do Evento: <?php echo date('d/m/Y', strtotime($evento_data));?></span><br>
-    
                     </div>
                     <?php
                 }
@@ -111,18 +107,15 @@ function check_specific_day_posts() {
                 $query->the_post()?>
                 <?php 
                 $evento_data = get_post_meta(get_the_ID(), '_data_evento', true);
-                $local_value = get_post_meta(get_the_ID(), '_local_value', true);
+                $local = get_post_meta(get_the_ID(), '_local_value', true);
                 $horario_inicio = get_post_meta(get_the_ID(), '_horario_inicio', true);
                 $horario_final = get_post_meta(get_the_ID(), '_horario_final', true);
                 
                 ;?>
                 <div class="agenda-post">
-                    <span class="list 1"><a href="<?php echo get_permalink() ;?>"><?php echo get_the_title() ;?></a></span>
-                    <span><?php the_content(); ?></span>
-                    <span>Horario de inicio: <?php echo $horario_inicio;?></span><br>
-                    <span>Horario Final: <?php echo $horario_final;?></span><br>
-                    <span>Local: <?php echo $local_value;?></span><br>
-                    <span>Data do Evento: <?php echo date('d/m/Y', strtotime($evento_data));?></span>
+                    <span class=""><a href="<?php echo get_permalink() ;?>"><?php echo get_the_title() ;?></a></span>
+                    <span><?php //the_content(); ?></span>
+                    <span>Local: <?php echo $local;?></span><br>
                 </div>
                 <hr>
                <?php 
