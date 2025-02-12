@@ -71,7 +71,7 @@ function agenda_shortcode() {
                     <?php
                 }
             } else {
-                echo '<p>Nenhum post encontrado.</p>';
+                echo '<p>Nenhum evento encontrado para o dia ' . date('d/m/Y', strtotime($date)) . '.</p>';
             }
             wp_reset_postdata();
             ?>
@@ -126,11 +126,11 @@ function check_specific_day_posts() {
                         <h3 class="title"><a href="<?php echo get_permalink() ;?>"><?php echo get_the_title() ;?></a></h3>
                         <span class="local"><?php echo $local;?></span>    
                     </div>
-                    </div>
+                </div>
                <?php 
             }
         } else {
-            echo '<p>Nenhum post encontrado para o dia ' . date('d/m/Y', strtotime($date)) . '.</p>';
+            echo '<p>Nenhum evento encontrado para o dia ' . date('d/m/Y', strtotime($date)) . '.</p>';
         }
         wp_reset_postdata();
     }

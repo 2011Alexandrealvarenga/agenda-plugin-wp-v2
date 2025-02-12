@@ -40,4 +40,21 @@ function agenda_enqueue_css(){
 add_action('wp_enqueue_scripts', 'agenda_enqueue_css');
 
 
-
+// se os posts forem do tipo posts, carrega os o arquivo single-agenda
+function meu_plugin_incluir_template_agenda($template) {
+    // Verifica se é um post do tipo "agenda"
+    if (is_singular('agenda')) {
+        // Caminho para o arquivo template no seu plugin
+        $plugin_template = plugin_dir_path(__FILE__) . 'single-agenda.php';
+        
+        // Verifica se o arquivo existe no plugin e retorna o caminho do arquivo
+        if (file_exists($plugin_template)) {
+            return $plugin_template;
+        }
+    }
+  
+    // Retorna o template padrão caso não seja um post do tipo "agenda"
+    return $template;
+  }
+  
+//   add_filter('template_include', 'meu_plugin_incluir_template_agenda');
