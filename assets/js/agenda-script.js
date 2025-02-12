@@ -3,7 +3,7 @@ jQuery(document).ready(function($) {
 
   // Inicializa o Datepicker
   $('#agenda-datepicker').datepicker({
-      dateFormat: 'yy-mm-dd', // Formato da data
+      dateFormat: 'dd/mm/yy', // Formato da data
       onSelect: function(dateText) {
           // Quando uma data é selecionada, busca os posts
           $.ajax({
