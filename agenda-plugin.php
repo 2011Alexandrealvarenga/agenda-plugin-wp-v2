@@ -22,12 +22,14 @@ function agenda_shortcode() {
             <div class="btn-arrow mg-r8">
                 <img src="<?php echo plugin_dir_url(__FILE__); ?>/assets/img/arrow-left.svg" id="check-previous-day" class="icon-arrow">
             </div>
+
+            <label for="agenda-datepicker" class="mg-r8"><b>Selecione uma data:</b></label>
+            <input type="text" id="agenda-datepicker" class="mg-r8" readonly>
+
             <div class="btn-arrow mg-r8">
                 <img src="<?php echo plugin_dir_url(__FILE__); ?>/assets/img/arrow-right.svg" id="check-next-day" class="icon-arrow">
             </div>
 
-            <label for="agenda-datepicker" class="mg-r8">Selecione uma data:</label>
-            <input type="text" id="agenda-datepicker" readonly>
             
         </div>
         <h2 class="subtitle">Últimos Eventos</h2>
@@ -71,7 +73,7 @@ function agenda_shortcode() {
                     <?php
                 }
             } else {
-                echo '<p>Nenhum evento encontrado para o dia ' . date('d/m/Y', strtotime($date)) . '.</p>';
+                echo '<p>Sem eventos programados para este dia </p>';
             }
             wp_reset_postdata();
             ?>
@@ -101,8 +103,9 @@ function check_specific_day_posts() {
         );
         $query = new WP_Query($args);?>
 
-        <p>Data: <?php echo date('d/m/Y', strtotime($date));?></p>
-        
+        <p><b><?php echo date_i18n('j \d\e F \d\e Y', strtotime($date));?></b></p>
+
+        <!-- date_i18n('j \d\e F', strtotime($evento_data)) -->
          <?php 
         if ($query->have_posts()) {
             while ($query->have_posts()) {
@@ -130,7 +133,7 @@ function check_specific_day_posts() {
                <?php 
             }
         } else {
-            echo '<p>Nenhum evento encontrado para o dia ' . date('d/m/Y', strtotime($date)) . '.</p>';
+            echo '<p>Sem eventos programados para este dia</p>';
         }
         wp_reset_postdata();
     }
