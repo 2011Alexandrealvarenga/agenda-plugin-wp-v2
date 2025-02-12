@@ -58,11 +58,15 @@ function agenda_shortcode() {
                     
                     <div class="agenda-post">
                         <div class="content-inside">
+                            <div class="data-left">
+                                <span>02</span>
+                                <span class="month">fev</span>
+                            </div>
                             <div class="content-date">                                
                                 <span class="local"><span class="local"><?php echo date('H:i', strtotime($horario_inicio));?></span> - <span class="local"><?php echo date('H:i', strtotime($horario_final));?></span>
+                                <h3 class="title"><?php echo get_the_title() ;?></h3>
+                                <span class="local"><?php echo $local_value;?></span>    
                             </div>
-                            <h3 class="title"><a href="<?php echo get_permalink() ;?>"><?php echo get_the_title() ;?></a></h3>
-                            <span class="local"><?php echo $local_value;?></span>    
                         </div>
                     </div>
                     <?php
