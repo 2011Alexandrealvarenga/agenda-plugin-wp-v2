@@ -23,6 +23,9 @@ hr {border: 1px solid #e9e9e9;}
   margin: 0;
   padding: 0;
 }
+.agenda-post{
+  border-bottom: 1px solid #ccc;
+}
 .agenda-post .content-inside {
   margin: 0 0 0 32px;
   padding: 24px 0;
@@ -36,7 +39,8 @@ hr {border: 1px solid #e9e9e9;}
   font-weight: 500;
 }
 .agenda-post .content-inside .local {
-  font-size: 15px;
+  font-size: 14px;
+  color: #333;
 }
 .content-inside {
   display: flex
