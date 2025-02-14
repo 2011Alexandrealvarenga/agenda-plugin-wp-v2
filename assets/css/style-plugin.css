@@ -31,7 +31,7 @@ hr {border: 1px solid #e9e9e9;}
 }
 .agenda-post .content-inside {
   margin: 0 0 0 32px;
-  padding: 24px 0;
+  padding: 40px 0;
 }
 
 
@@ -50,9 +50,9 @@ hr {border: 1px solid #e9e9e9;}
   flex-direction: column;
   margin-right: 16px;
   font-weight: 600;
+  font-size: 24px;
 }
 
 .content-agenda #agenda-posts .agenda-post .content-inside .data-left .month{
   color: red;
-  font-size: 24px;
 }

@@ -17,23 +17,18 @@ function agenda_shortcode() {
     ?>
     <div class="content-agenda">
 
-        <!-- <button id="check-previous-day">Verificar posts do dia anterior</button> -->
-         <div class="content-arrow">
+        <div class="content-arrow">
             <div class="btn-arrow mg-r8">
                 <img src="<?php echo plugin_dir_url(__FILE__); ?>/assets/img/arrow-left.svg" id="check-previous-day" class="icon-arrow">
             </div>
 
-            <!-- <label for="agenda-datepicker" class="mg-r8"><b>Selecione uma data:</b></label> -->
             <input type="text" id="agenda-datepicker" class="mg-r8" readonly>
 
             <div class="btn-arrow mg-r8">
                 <img src="<?php echo plugin_dir_url(__FILE__); ?>/assets/img/arrow-right.svg" id="check-next-day" class="icon-arrow">
-            </div>
-
-            
+            </div>            
         </div>
         <h2 class="subtitle">Últimos Eventos</h2>
-        <!-- <button >Verificar posts do dia posterior</button> -->
         <div id="agenda-posts">
             <?php
             $args = array(
@@ -48,9 +43,30 @@ function agenda_shortcode() {
     
             if ($query->have_posts()) {
                 while ($query->have_posts()) {
-                    $query->the_post();?>
-                    <!-- get agenda content -->
-                     <?php include( plugin_dir_path( __FILE__ ) . 'templates-parts/content-agenda.php');;?>
+                    $query->the_post();
+                    $evento_data = get_post_meta(get_the_ID(), '_data_evento', true);
+                    $local_value = get_post_meta(get_the_ID(), '_local_value', true);
+                    $horario_inicio = get_post_meta(get_the_ID(), '_horario_inicio', true);
+                    $horario_final = get_post_meta(get_the_ID(), '_horario_final', true);
+                    if ($evento_data) {
+                        $evento_data_formatada = date('d/m/Y', strtotime($evento_data)); // Formata a data do evento
+                    }
+                    ?>
+
+                    <div class="agenda-post">
+                      <div class="content-inside">
+                          <div class="data-left">
+                              <span><?php echo date('d', strtotime($evento_data)); ?></span>
+                              <span class="month"><p><b><?php echo date('M', strtotime($evento_data)); ?></b></p></span>
+                          </div>
+                          <div class="content-date">                                 
+                              <span class="local"><span class="local"><?php echo date('H:i', strtotime($horario_inicio));?></span> - <span class="local"><?php echo date('H:i', strtotime($horario_final));?></span></span>
+                              <h3 class="title"><?php echo get_the_title(); ?></h3>
+                              <span class="local"><?php echo $local_value;?></span>    
+                          </div>
+                      </div>
+                    </div>
+
                     <?php
                 }
             } else {
@@ -66,6 +82,7 @@ function agenda_shortcode() {
 }
 
 add_shortcode('agenda', 'agenda_shortcode');
+
 
 
 function check_specific_day_posts() {
@@ -92,8 +109,28 @@ function check_specific_day_posts() {
             while ($query->have_posts()) {
                 $query->the_post();?>
                 <!-- get agenda content -->
-                <?php include( plugin_dir_path( __FILE__ ) . 'templates-parts/content-agenda.php');;?>
+                <?php 
+                        $evento_data = get_post_meta(get_the_ID(), '_data_evento', true);
+                        $local_value = get_post_meta(get_the_ID(), '_local_value', true);
+                        $horario_inicio = get_post_meta(get_the_ID(), '_horario_inicio', true);
+                        $horario_final = get_post_meta(get_the_ID(), '_horario_final', true);
+                    ;?>
+
+                    <div class="agenda-post">
+                    <div class="content-inside">
+                        <div class="data-left">
+                            <span><?php echo date_i18n('j', strtotime($date));?></span>
+                            <span class="month"><p><b><?php echo date_i18n('M', strtotime($date));?></b></p></span>
+                        </div>
+                        <div class="content-date">                                
+                            <span class="local"><span class="local"><?php echo date('H:i', strtotime($horario_inicio));?></span> - <span class="local"><?php echo date('H:i', strtotime($horario_final));?></span>
+                            <h3 class="title"><?php echo get_the_title() ;?></h3>
+                            <span class="local"><?php echo $local_value;?></span>    
+                        </div>
+                    </div>
+                    </div>
                <?php 
+
             }
         } else {
             echo '<p>Sem eventos programados para este dia</p>';

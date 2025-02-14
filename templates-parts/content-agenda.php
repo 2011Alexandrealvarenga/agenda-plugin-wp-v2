@@ -8,8 +8,8 @@
 <div class="agenda-post">
   <div class="content-inside">
       <div class="data-left">
-          <span>02</span>
-          <span class="month">fev</span>
+          <span><?php echo date_i18n('j', strtotime($date));?></span>
+          <span class="month"><p><b><?php echo date_i18n('M', strtotime($date));?></b></p></span>
       </div>
       <div class="content-date">                                
           <span class="local"><span class="local"><?php echo date('H:i', strtotime($horario_inicio));?></span> - <span class="local"><?php echo date('H:i', strtotime($horario_final));?></span>
