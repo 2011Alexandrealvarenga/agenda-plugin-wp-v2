@@ -2,7 +2,7 @@
   <div class="content-inside">
       <div class="data-left">
           <span class="day"><?php echo date('d', strtotime($evento_data)); ?></span>
-          <span class="month"><b><?php echo date('M', strtotime($evento_data)); ?></b></span>
+          <span class="month"><b><?php echo ucfirst(date_i18n('M', strtotime($evento_data))); ?></b></span>
           <span class="year"><b><?php echo date_i18n('Y', strtotime($evento_data));?></b></span>
       </div>
       <div class="content-date">                                 
