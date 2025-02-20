@@ -53,19 +53,7 @@ function agenda_shortcode() {
                     }
                     ?>
 
-                    <div class="agenda-post">
-                      <div class="content-inside">
-                          <div class="data-left">
-                              <span><?php echo date('d', strtotime($evento_data)); ?></span>
-                              <span class="month"><p><b><?php echo date('M', strtotime($evento_data)); ?></b></p></span>
-                          </div>
-                          <div class="content-date">                                 
-                              <span class="local"><span class="local"><?php echo date('H:i', strtotime($horario_inicio));?></span> - <span class="local"><?php echo date('H:i', strtotime($horario_final));?></span></span>
-                              <h3 class="title"><?php echo get_the_title(); ?></h3>
-                              <span class="local"><?php echo $local_value;?></span>    
-                          </div>
-                      </div>
-                    </div>
+                   <?php include('template-parts/content-item.php');?>
 
                     <?php
                 }
@@ -116,19 +104,7 @@ function check_specific_day_posts() {
                         $horario_final = get_post_meta(get_the_ID(), '_horario_final', true);
                     ;?>
 
-                    <div class="agenda-post">
-                    <div class="content-inside">
-                        <div class="data-left">
-                            <span><?php echo date_i18n('j', strtotime($date));?></span>
-                            <span class="month"><p><b><?php echo date_i18n('M', strtotime($date));?></b></p></span>
-                        </div>
-                        <div class="content-date">                                
-                            <span class="local"><span class="local"><?php echo date('H:i', strtotime($horario_inicio));?></span> - <span class="local"><?php echo date('H:i', strtotime($horario_final));?></span>
-                            <h3 class="title"><?php echo get_the_title() ;?></h3>
-                            <span class="local"><?php echo $local_value;?></span>    
-                        </div>
-                    </div>
-                    </div>
+                    <?php include('template-parts/content-item.php');?>
                <?php 
 
             }
